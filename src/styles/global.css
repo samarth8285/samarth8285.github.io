@@ -1,56 +1,11 @@
 /* ---------------------------------------------------------------
-   Type: self-hosted, served from /public/fonts — never a hosted
-   stylesheet dependency.
+   Type: self-hosted from /public/fonts. The @font-face rules live in
+   BaseLayout.astro, not here — this file is a plain imported CSS
+   asset with no access to import.meta.env.BASE_URL, and a hardcoded
+   root-absolute "/fonts/..." path breaks under a GitHub Pages project
+   subpath (e.g. /samarth_personal_website/). BaseLayout injects the
+   same rules with the base prefix applied at build time.
    --------------------------------------------------------------- */
-@font-face {
-  font-family: "Archivo";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/archivo-400.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Archivo";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("/fonts/archivo-500.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Archivo";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("/fonts/archivo-600.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Archivo";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("/fonts/archivo-700.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Archivo";
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url("/fonts/archivo-800.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Space Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/space-mono-400.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Space Mono";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("/fonts/space-mono-700.woff2") format("woff2");
-}
 
 /* ---------------------------------------------------------------
    Tokens — Engineering Force Diagram world.
