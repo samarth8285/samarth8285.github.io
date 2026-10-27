@@ -25,10 +25,13 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
-          # withastro/action's own default Node is older than Astro 7
-          # requires (package.json pins engines.node >=22.23.4) —
-          # pin it explicitly rather than relying on the action's default.
-          node-version: "22"
+          # withastro/action@v3 defaults to Node 20, older than Astro 7
+          # requires (package.json pins engines.node >=22.23.4). "22"
+          # resolved to 22.23.3 on GitHub's hosted runner image — one
+          # patch behind, likely lag between a Node release and it
+          # landing in the runner's cache. "24" is unambiguously past
+          # the requirement regardless of exact patch availability.
+          node-version: "24"
 
   deploy:
     needs: build
