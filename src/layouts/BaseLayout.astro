@@ -7,6 +7,26 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+
+// Public assets (public/) are never base-prefixed by Astro
+// automatically — unlike import.meta.env.BASE_URL in frontmatter/HTML,
+// a plain imported CSS file has no way to see the configured `base`.
+// These paths are computed here once and used both for the favicon
+// link and the @font-face block below, so both deploy correctly
+// whether the site is served from "/" or a GitHub Pages project
+// subpath like "/samarth_personal_website/".
+const base = import.meta.env.BASE_URL;
+const font = (file: string) => `${base}fonts/${file}`;
+
+const fontFaceCSS = `
+  @font-face { font-family: "Archivo"; font-style: normal; font-weight: 400; font-display: swap; src: url("${font("archivo-400.woff2")}") format("woff2"); }
+  @font-face { font-family: "Archivo"; font-style: normal; font-weight: 500; font-display: swap; src: url("${font("archivo-500.woff2")}") format("woff2"); }
+  @font-face { font-family: "Archivo"; font-style: normal; font-weight: 600; font-display: swap; src: url("${font("archivo-600.woff2")}") format("woff2"); }
+  @font-face { font-family: "Archivo"; font-style: normal; font-weight: 700; font-display: swap; src: url("${font("archivo-700.woff2")}") format("woff2"); }
+  @font-face { font-family: "Archivo"; font-style: normal; font-weight: 800; font-display: swap; src: url("${font("archivo-800.woff2")}") format("woff2"); }
+  @font-face { font-family: "Space Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("${font("space-mono-400.woff2")}") format("woff2"); }
+  @font-face { font-family: "Space Mono"; font-style: normal; font-weight: 700; font-display: swap; src: url("${font("space-mono-700.woff2")}") format("woff2"); }
+`;
 ---
 
 <!doctype html>
@@ -14,10 +34,11 @@ const { title, description } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light" />
     <title>{title}</title>
+    <style set:html={fontFaceCSS}></style>
   </head>
   <body>
     <slot />
