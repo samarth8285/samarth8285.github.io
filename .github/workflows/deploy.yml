@@ -24,6 +24,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Install, build, and upload your site
         uses: withastro/action@v3
+        with:
+          # withastro/action's own default Node is older than Astro 7
+          # requires (package.json pins engines.node >=22.23.4) —
+          # pin it explicitly rather than relying on the action's default.
+          node-version: "22"
 
   deploy:
     needs: build
