@@ -1,0 +1,1048 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TechTag from "../components/TechTag.astro";
+
+const email = "samarthbhatt8285@gmail.com";
+
+const heroMetrics = [
+  { label: "ANNUAL COST REDUCED", value: "$170K" },
+  { label: "SLA COMPLIANCE", value: "100%" },
+  { label: "JOBS MIGRATED · ZERO DOWNTIME", value: "500+" },
+  { label: "FASTER DATA DISCOVERY", value: "40%" },
+];
+
+const experience = [
+  {
+    role: "Data Engineer",
+    org: "Rearc",
+    place: "Pune, India",
+    period: "Aug 2026 – Present",
+    // Current and just starting: nothing load-bearing proven here yet,
+    // so this member is drawn slack rather than taut.
+    state: "slack",
+    bullets: [
+      "Onboarding to cloud data practices and pursuing advanced platform certifications.",
+    ],
+  },
+  {
+    role: "Associate Data Engineer",
+    org: "Shell India Markets Pvt. Ltd.",
+    place: "Bengaluru, India",
+    period: "Aug 2023 – Jul 2026",
+    state: "taut",
+    bullets: [
+      "Managed end-to-end batch pipelines supporting financial reporting and regulatory submissions.",
+      "Implemented incremental, idempotent frameworks on Delta Lake for safe reprocessing.",
+      "Orchestrated 500+ production jobs through a zero-downtime migration, holding 100% SLA compliance throughout.",
+      "Built a centralized metadata platform that improved data discovery efficiency by roughly 40%.",
+      "Created a reusable engineering framework adopted across teams, saving 120+ engineering hours.",
+      "Designed star-schema models with SCD Type 2 dimensions for enterprise reporting.",
+      "Authored 7 internal technical guides standardizing pipeline practices and mentored 10+ engineers on performance tuning and data design.",
+      "Delivered Power BI dashboards for pricing and market analysis.",
+    ],
+  },
+  {
+    role: "Software Developer Intern",
+    org: "REVOLTRONIX",
+    place: "Ahmedabad, India",
+    period: "May – Jul 2022",
+    state: "taut",
+    bullets: [
+      "Built a cloud-based data ingestion and API layer using Node.js and Google Cloud.",
+      "Designed pipelines extracting and processing Reddit trend data for sentiment analysis.",
+      "Implemented serverless functions for automated transformation and querying.",
+    ],
+  },
+  {
+    role: "Frontend Web Developer Intern",
+    org: "Panayu",
+    place: "Ahmedabad, India",
+    period: "Oct – Dec 2021",
+    state: "taut",
+    bullets: [
+      "Built data-driven web interfaces integrating backend APIs with frontend components.",
+      "Designed and optimized MongoDB data models for efficient retrieval.",
+    ],
+  },
+];
+
+const skillGroups = [
+  {
+    heading: "Programming & Querying",
+    items: ["Python (PySpark, Pandas)", "SQL (Spark SQL, Databricks SQL)", "Query Optimization"],
+  },
+  {
+    heading: "Big Data & Processing",
+    items: [
+      "Apache Spark",
+      "Delta Lake",
+      "Databricks Lakeflow",
+      "Batch & Incremental Processing",
+      "Medallion / Lakehouse Architecture",
+      "Data Warehousing",
+    ],
+  },
+  {
+    heading: "Cloud & Platforms",
+    items: ["Microsoft Azure", "Azure Databricks", "ADLS Gen2", "Unity Catalog", "Docker"],
+  },
+  {
+    heading: "Data Quality & Governance",
+    items: [
+      "Data Validation",
+      "Reconciliation",
+      "Audit Controls",
+      "RBAC",
+      "Data Governance",
+      "Star Schema",
+      "SCD Type 2",
+    ],
+  },
+  {
+    heading: "Orchestration & CI/CD",
+    items: [
+      "Control-M",
+      "Git",
+      "GitHub Actions",
+      "Bash / Shell Scripting",
+      "Databricks Asset Bundles",
+      "Infrastructure-as-Code",
+    ],
+  },
+  {
+    heading: "Analytics & BI",
+    items: ["Databricks SQL", "Power BI", "AI/BI (Lakeview) Dashboards"],
+  },
+  {
+    heading: "APIs & Formats",
+    items: ["REST APIs", "JSON", "CSV", "Excel", "Parquet"],
+  },
+  {
+    heading: "Other",
+    items: ["Node.js", "MongoDB", "Google Cloud"],
+  },
+];
+
+const certifications = [
+  { name: "Databricks Certified Data Engineer Professional", date: "Aug 2026" },
+  { name: "Databricks Certified Generative AI Engineer Associate", date: "Oct 2026" },
+  { name: "Databricks Certified Apache Spark Developer", date: "Jun 2024" },
+  { name: "Databricks Certified Associate Data Engineer", date: "Jan 2024" },
+];
+
+const pipelineStages = ["RAW FILES", "BRONZE", "SILVER", "GOLD", "AI/BI"];
+
+const navLinks = [
+  { href: "#experience", label: "Experience" },
+  { href: "#project", label: "Project" },
+  { href: "#skills", label: "Skills" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<BaseLayout
+  title="Samarth Bhatt — Data Engineer, Cloud Data Platforms"
+  description="Data engineer building SLA-critical financial and regulatory pipelines on Azure Databricks. Proof carried in outcomes, not claims."
+>
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a href="#top" class="mark mono">S.BHATT</a>
+      <nav aria-label="Primary">
+        <ul class="nav-list mono-label" id="primary-nav">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <button
+          type="button"
+          class="nav-toggle"
+          id="nav-toggle"
+          aria-expanded="false"
+          aria-controls="primary-nav"
+          aria-label="Open menu"
+        >
+          <span class="nav-toggle__bar" aria-hidden="true"></span>
+          <span class="nav-toggle__bar" aria-hidden="true"></span>
+        </button>
+      </nav>
+      <p class="status-readout mono-label" id="status-readout" aria-hidden="true">
+        STATUS: BALANCED
+      </p>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="wrap hero__inner">
+        <div class="hero__intro reveal">
+          <h1>Samarth Bhatt</h1>
+          <p class="lede hero__role">Data Engineer — Cloud Data Platforms</p>
+          <p class="lede">
+            Three years engineering SLA-critical financial and regulatory data
+            pipelines on Azure Databricks. Every claim below is pinned to a
+            real outcome — the structure only stands because the numbers
+            underneath it are true.
+          </p>
+          <div class="hero__actions">
+            <a class="cta" href="#experience">View experience</a>
+            <a class="cta cta--ghost mono" href={`mailto:${email}`}>{email} →</a>
+          </div>
+        </div>
+
+        <ol class="column column--hero" aria-label="Verified career metrics">
+          <span class="spine-packet" aria-hidden="true"></span>
+          <span class="spine-packet spine-packet--b" aria-hidden="true"></span>
+          {
+            heroMetrics.map((m, i) => (
+              <li class="column__segment column__segment--metric reveal" style={`--hit-delay: ${i * 0.7}s`}>
+                <svg class="column__tick" viewBox="0 0 40 24" aria-hidden="true">
+                  <circle cx="4" cy="12" r="4" class="column__node-dot" />
+                  <line class="reveal-line column__node-line" x1="4" y1="12" x2="36" y2="12" style="--len: 32" />
+                </svg>
+                <div class="column__content">
+                  <p class="mono-label">{m.label}</p>
+                  <p class="column__metric-value mono tnum">{m.value}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section id="experience">
+      <div class="wrap">
+        <h2 class="reveal">Experience</h2>
+        <ol class="column">
+          <span class="spine-packet spine-packet--up" aria-hidden="true"></span>
+          <span class="spine-packet spine-packet--up spine-packet--up-b" aria-hidden="true"></span>
+          {
+            experience.map((job, i) => (
+              <li
+                class={`column__segment reveal ${job.state === "slack" ? "column__segment--slack" : ""}`}
+                style={`--hit-delay: ${(experience.length - 1 - i) * 1.3}s`}
+              >
+                <svg class="column__tick" viewBox="0 0 40 24" aria-hidden="true">
+                  <circle cx="4" cy="12" r="4" class="column__node-dot" />
+                  <line class="reveal-line column__node-line" x1="4" y1="12" x2="36" y2="12" style="--len: 32" />
+                </svg>
+                <div class="column__content">
+                  <div class="column__head">
+                    <h3>
+                      {job.role} <span class="column__org">— {job.org}</span>
+                    </h3>
+                    <p class="mono-label column__meta">
+                      {job.place} · {job.period}
+                    </p>
+                  </div>
+                  <ul class="column__bullets">
+                    {job.bullets.map((b) => (
+                      <li>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= PROJECT ================= -->
+    <section id="project">
+      <div class="wrap">
+        <div class="branch">
+          <svg class="branch__connector" viewBox="0 0 60 60" preserveAspectRatio="none" aria-hidden="true">
+            <polyline class="reveal-line branch__line" points="0,0 40,0 60,60" style="--len: 108" />
+          </svg>
+          <div class="branch__content reveal">
+            <h2>Project</h2>
+            <h3 class="branch__title">NYC Yellow Taxi Data Pipeline</h3>
+            <p class="lede">
+              A medallion-architecture pipeline processing 209 monthly NYC TLC
+              trip-record files (2009–2026), deployed as a Databricks Asset
+              Bundle. Schema-aware Auto Loader ingestion reconciles 3
+              incompatible historical layouts into one clean Silver layer;
+              Gold aggregate tables support AI/BI dashboards.
+            </p>
+
+            <div class="pipeline reveal" role="img" aria-label="Pipeline stages: raw files flow through Bronze, Silver, and Gold layers into AI/BI dashboards">
+              <svg class="pipeline__flow" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="0" y1="5" x2="100" y2="5" class="pipeline__rail" />
+              </svg>
+              <span class="pipeline__packet" aria-hidden="true"></span>
+              <ol class="pipeline__stages">
+                {
+                  pipelineStages.map((stage) => (
+                    <li class="mono-label pipeline__stage">{stage}</li>
+                  ))
+                }
+              </ol>
+            </div>
+
+            <div class="tag-row">
+              <TechTag label="PySpark" />
+              <TechTag label="Delta Lake" />
+              <TechTag label="Databricks Asset Bundles" />
+              <TechTag label="Auto Loader" />
+              <TechTag label="Medallion Architecture" />
+              <TechTag label="AI/BI Dashboards" />
+            </div>
+            <a class="cta cta--ghost mono" href="https://github.com/samarth8285/nyc-yellow-taxi-project" target="_blank" rel="noreferrer">
+              github.com/samarth8285/nyc-yellow-taxi-project →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills">
+      <div class="wrap">
+        <h2 class="reveal">Skills</h2>
+        <div class="struts reveal">
+          {
+            skillGroups.map((g) => (
+              <div class="strut">
+                <p class="mono-label strut__heading">{g.heading}</p>
+                <p class="strut__items">{g.items.join(" · ")}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="certs reveal">
+          <p class="mono-label certs__heading">Certifications</p>
+          <ul class="certs__list">
+            {
+              certifications.map((c) => (
+                <li>
+                  <span>{c.name}</span>
+                  <span class="mono certs__date tnum">{c.date}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <p class="education reveal mono-label">
+          B.E. Computer Engineering, AI &amp; Machine Learning — NMIMS, 2019–2023
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="contact">
+      <div class="wrap contact__inner reveal">
+        <h2>Let's build something reliable.</h2>
+        <p class="lede">
+          Currently at Rearc, Pune, onboarding to cloud data practice. Open to
+          conversations about data engineering, platform reliability, and
+          Azure Databricks work.
+        </p>
+        <div class="contact__links">
+          <a class="cta" href={`mailto:${email}`}>{email}</a>
+          <a class="cta cta--ghost mono" href="https://linkedin.com/in/samarthbhatt25" target="_blank" rel="noreferrer">
+            linkedin.com/in/samarthbhatt25 ↗
+          </a>
+          <a class="cta cta--ghost mono" href="https://github.com/samarth8285" target="_blank" rel="noreferrer">
+            github.com/samarth8285 ↗
+          </a>
+        </div>
+      </div>
+      <div class="ground" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner mono-label">
+      <p>Samarth Bhatt</p>
+      <p>Built with Astro</p>
+    </div>
+  </footer>
+
+  <style>
+    /* ---------------- Header ---------------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .site-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding-block: var(--space-2);
+      position: relative;
+    }
+
+    .site-header nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .mark {
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.875rem;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-list {
+      display: none;
+      list-style: none;
+      gap: var(--space-3);
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-list a {
+      text-decoration: none;
+      color: var(--ink-secondary);
+      transition: color 0.2s ease;
+    }
+
+    .nav-list a:hover {
+      color: var(--ink);
+    }
+
+    @media (min-width: 640px) {
+      .nav-list {
+        display: flex;
+      }
+    }
+
+    .nav-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-toggle__bar {
+      display: block;
+      width: 100%;
+      height: 1.5px;
+      background: var(--ink);
+      transition: transform 0.25s var(--ease-out-expo), opacity 0.2s ease;
+    }
+
+    .nav-toggle[aria-expanded="true"] .nav-toggle__bar:first-child {
+      transform: translateY(3.25px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] .nav-toggle__bar:last-child {
+      transform: translateY(-3.25px) rotate(-45deg);
+    }
+
+    @media (min-width: 640px) {
+      .nav-toggle {
+        display: none;
+      }
+    }
+
+    @media (max-width: 639px) {
+      .nav-list.is-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--stroke);
+        padding: var(--space-3);
+        gap: var(--space-3);
+      }
+    }
+
+    .status-readout {
+      white-space: nowrap;
+      color: var(--accent);
+      min-width: 9ch;
+      text-align: right;
+    }
+
+    /* ---------------- Hero ---------------- */
+    .hero {
+      padding-block: var(--space-7) var(--space-6);
+    }
+
+    .hero__inner {
+      display: grid;
+      gap: var(--space-5);
+    }
+
+    .hero__role {
+      color: var(--ink);
+      font-weight: 500;
+      margin-top: var(--space-2);
+    }
+
+    .hero__intro p.lede + p.lede {
+      margin-top: var(--space-2);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.85rem 1.5rem;
+      background: var(--ink);
+      color: var(--bg);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      transition: transform 0.2s var(--ease-out-expo), background 0.2s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      background: var(--accent);
+    }
+
+    .cta--ghost {
+      background: transparent;
+      color: var(--ink-secondary);
+      padding: 0.85rem 0;
+      clip-path: none;
+      font-size: 0.875rem;
+    }
+
+    .cta--ghost:hover {
+      color: var(--accent);
+      transform: none;
+      background: transparent;
+    }
+
+    /* ---------------- Spine (shared by hero metrics and experience) ---------------- */
+    /* One mechanism, reused: a vertical spine, each member pinned to it by
+       a short leader line that draws in on reveal. A taut red member is a
+       proven claim; a slack ash-gray member hasn't been load-tested yet. */
+    .column {
+      list-style: none;
+      margin: var(--space-5) 0 0;
+      padding: 0;
+      position: relative;
+    }
+
+    .column::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 1px;
+      background: var(--stroke);
+    }
+
+    .column__segment {
+      position: relative;
+      padding-left: var(--space-4);
+      display: flex;
+    }
+
+    .column__segment + .column__segment {
+      margin-top: var(--space-5);
+    }
+
+    .column__tick {
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 40px;
+      height: 24px;
+      overflow: visible;
+    }
+
+    .column__node-dot {
+      fill: var(--accent);
+    }
+
+    .column__node-line {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+    }
+
+    .column__segment--slack .column__node-dot {
+      fill: var(--slack);
+    }
+
+    .column__segment--slack .column__node-line {
+      stroke: var(--slack);
+    }
+
+    .column__segment--slack .column__head h3,
+    .column__segment--slack .column__bullets {
+      color: var(--ink-secondary);
+    }
+
+    .column__content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Hero variant: metric label + value instead of role + bullets,
+       tighter rhythm so the structure reads as one quick cascade. */
+    .column--hero {
+      margin-top: var(--space-3);
+      padding-top: var(--space-3);
+      border-top: 1px dashed var(--stroke);
+      max-width: 26rem;
+    }
+
+    .column--hero .column__segment + .column__segment {
+      margin-top: var(--space-3);
+    }
+
+    /* Data-flow: two packets travel the spine on a continuous loop,
+       and each node brightens on the beat it would arrive at —
+       demonstrating the pipeline, not decorating the page. Plain HTML
+       dots positioned with top% (not SVG + preserveAspectRatio="none"
+       + a circle's r, which a non-uniform stretch turns into a thin
+       ellipse): top% resolves against the real container height with
+       no distortion and no JS measurement. */
+    .spine-packet {
+      position: absolute;
+      left: -2px;
+      top: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: spine-travel 2.8s linear infinite;
+      pointer-events: none;
+    }
+
+    .spine-packet--b {
+      animation-delay: 1.4s;
+    }
+
+    @keyframes spine-travel {
+      0% {
+        top: 0%;
+        opacity: 0;
+      }
+      6% {
+        opacity: 1;
+      }
+      94% {
+        opacity: 1;
+      }
+      100% {
+        top: 100%;
+        opacity: 0;
+      }
+    }
+
+    .column--hero .column__node-dot {
+      animation: node-hit 2.8s ease-out infinite;
+      animation-delay: var(--hit-delay, 0s);
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    @keyframes node-hit {
+      0%,
+      10%,
+      100% {
+        transform: scale(1);
+      }
+      4% {
+        transform: scale(1.8);
+      }
+    }
+
+    /* Experience: the same mechanism, reversed — career history flows
+       bottom to top into the current role, rather than the hero's
+       top-down read of already-settled proof. Slower (5.2s) to match
+       the column's greater height; the bullet lists vary a lot in
+       length so the "hit" timing is an honest approximation, same as
+       the hero's even spacing, not a pixel-exact sync. */
+    #experience .column__node-dot {
+      animation: node-hit 5.2s ease-out infinite;
+      animation-delay: var(--hit-delay, 0s);
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .spine-packet--up {
+      animation-name: spine-travel-up;
+      animation-duration: 5.2s;
+    }
+
+    .spine-packet--up-b {
+      animation-delay: 2.6s;
+    }
+
+    @keyframes spine-travel-up {
+      0% {
+        top: 100%;
+        opacity: 0;
+      }
+      6% {
+        opacity: 1;
+      }
+      94% {
+        opacity: 1;
+      }
+      100% {
+        top: 0%;
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .spine-packet {
+        animation: none;
+        opacity: 0;
+      }
+      .column--hero .column__node-dot,
+      #experience .column__node-dot {
+        animation: none;
+      }
+    }
+
+    .column__segment--metric .column__content {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .column__metric-value {
+      font-weight: 700;
+      font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2rem);
+      flex-shrink: 0;
+    }
+
+    .column__head h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .column__org {
+      color: var(--ink-secondary);
+      font-weight: 400;
+    }
+
+    .column__meta {
+      margin-top: 0.35rem;
+    }
+
+    .column__bullets {
+      margin: var(--space-2) 0 0;
+      padding-left: 1.1rem;
+      color: var(--ink-secondary);
+      max-width: 62ch;
+    }
+
+    .column__bullets li + li {
+      margin-top: 0.5rem;
+    }
+
+    /* ---------------- Project branch ---------------- */
+    .branch {
+      display: grid;
+      grid-template-columns: 60px minmax(0, 1fr);
+      gap: var(--space-3);
+    }
+
+    .branch__connector {
+      width: 60px;
+      height: 100%;
+      min-height: 60px;
+    }
+
+    .branch__line {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .branch__title {
+      margin-top: var(--space-2);
+      font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
+    }
+
+    .branch__content .lede {
+      margin-top: var(--space-2);
+    }
+
+    /* Pipeline flow: a packet travels the rail left to right, changing
+       from slack ash (raw, unvalidated) to taut red (reconciled,
+       trustworthy) as it crosses into Silver — the one color change
+       on the page that means something rather than decorating. */
+    .pipeline {
+      position: relative;
+      margin: var(--space-4) 0;
+      padding-top: var(--space-3);
+    }
+
+    .pipeline__flow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      overflow: visible;
+    }
+
+    .pipeline__rail {
+      stroke: var(--stroke);
+      stroke-width: 1;
+    }
+
+    /* A plain HTML dot, not an SVG circle: the rail's SVG stretches
+       non-uniformly (preserveAspectRatio="none") to track container
+       width without JS, which is fine for a straight line but turns
+       a circle's radius into a thin ellipse. left% on this dot
+       resolves against the real box width with no distortion. */
+    .pipeline__packet {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--slack);
+      animation: pipeline-travel 4.4s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes pipeline-travel {
+      0% {
+        left: 0%;
+        opacity: 0;
+        background: var(--slack);
+      }
+      5% {
+        opacity: 1;
+      }
+      38% {
+        background: var(--slack);
+      }
+      45% {
+        background: var(--accent);
+      }
+      95% {
+        opacity: 1;
+        background: var(--accent);
+      }
+      100% {
+        left: 100%;
+        opacity: 0;
+        background: var(--accent);
+      }
+    }
+
+    .pipeline__stages {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-2);
+      margin: 0;
+      padding: 0;
+    }
+
+    .pipeline__stage {
+      white-space: nowrap;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pipeline__packet {
+        animation: none;
+        opacity: 0;
+      }
+    }
+
+    /* ---------------- Skills ---------------- */
+    .struts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-4) var(--space-4);
+      margin-top: var(--space-4);
+    }
+
+    .strut__heading {
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--stroke);
+      margin-bottom: 0.6rem;
+    }
+
+    .strut__items {
+      color: var(--ink-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    .certs {
+      margin-top: var(--space-5);
+      padding-top: var(--space-4);
+      border-top: 1px dashed var(--stroke);
+    }
+
+    .certs__heading {
+      margin-bottom: var(--space-2);
+    }
+
+    .certs__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .certs__list li {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-3);
+      max-width: 48rem;
+    }
+
+    .certs__date {
+      color: var(--ink-secondary);
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+
+    .education {
+      margin-top: var(--space-4);
+    }
+
+    /* ---------------- Contact ---------------- */
+    .contact {
+      position: relative;
+      padding-bottom: 0;
+    }
+
+    .contact__inner {
+      padding-bottom: var(--space-6);
+    }
+
+    .contact .lede {
+      margin-top: var(--space-2);
+    }
+
+    .contact__links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .ground {
+      height: 6px;
+      background: var(--ink);
+    }
+
+    /* ---------------- Footer ---------------- */
+    .site-footer {
+      padding-block: var(--space-3);
+    }
+
+    .site-footer__inner {
+      display: flex;
+      justify-content: space-between;
+      color: var(--ink-secondary);
+    }
+  </style>
+
+  <script>
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // Measure each leader-line's real path length so the dash
+    // animation strokes in precisely, instead of a guessed value.
+    document.querySelectorAll<SVGGeometryElement>(".reveal-line").forEach((line) => {
+      const len = line.getTotalLength();
+      line.style.setProperty("--len", String(len));
+    });
+
+    const revealEls = document.querySelectorAll(".reveal");
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealEls.forEach((el) => el.classList.add("is-visible"));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    }
+
+    // Mobile nav: a plain disclosure, closes on link choice or Escape.
+    const navToggle = document.getElementById("nav-toggle");
+    const navList = document.getElementById("primary-nav");
+    if (navToggle && navList) {
+      const closeNav = () => {
+        navToggle.setAttribute("aria-expanded", "false");
+        navList.classList.remove("is-open");
+      };
+      navToggle.addEventListener("click", () => {
+        const open = navToggle.getAttribute("aria-expanded") === "true";
+        navToggle.setAttribute("aria-expanded", String(!open));
+        navList.classList.toggle("is-open", !open);
+      });
+      navList.addEventListener("click", (e) => {
+        if ((e.target as HTMLElement).tagName === "A") closeNav();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeNav();
+      });
+    }
+
+    // Persistent corner readout — a quiet trust signal, not a
+    // notification. Static under reduced motion.
+    const readout = document.getElementById("status-readout");
+    if (readout && !reduceMotion) {
+      const states = ["STATUS: BALANCED", "LOAD: VERIFIED", "UPTIME: 100%"];
+      let i = 0;
+      setInterval(() => {
+        i = (i + 1) % states.length;
+        readout.textContent = states[i];
+      }, 4000);
+    }
+  </script>
+</BaseLayout>
