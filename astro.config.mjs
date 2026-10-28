@@ -11,5 +11,5 @@ export default defineConfig({
   // references in the codebase resolve through BASE_URL, so no other
   // changes would be needed.
   site: 'https://samarth8285.github.io',
-  base: '/samarth_personal_website/',
+  base: '/',
 });
