@@ -27,9 +27,10 @@ pnpm-debug.log*
 # settings.local.json, ignore everything else under .claude/
 .claude/*
 !.claude/settings.local.json
-skills-lock.json
 
 # Impeccable
 .impeccable/
 
 .vscode/
+
+.agents/
