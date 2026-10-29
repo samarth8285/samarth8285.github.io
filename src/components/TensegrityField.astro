@@ -1,0 +1,212 @@
+---
+// Ambient 3D background — a sparse node-and-strut lattice, the same
+// vocabulary as the content's leader-line spine (dot + line, no fill,
+// no shading) just run as a full depth field behind the page. Lines
+// and nodes stay in the neutral palette only — red is reserved for a
+// verified claim, never a decorative flourish (see DESIGN.md).
+---
+
+<canvas id="tensegrity-field" aria-hidden="true"></canvas>
+
+<style>
+  #tensegrity-field {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById("tensegrity-field") as HTMLCanvasElement | null;
+  if (!canvas) throw new Error("tensegrity-field canvas missing");
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Read live, not hardcoded, so light/dark both use their own token
+  // values — the lattice re-reads this on every "themechange" toggle.
+  function themeColors() {
+    const styles = getComputedStyle(document.documentElement);
+    return {
+      stroke: styles.getPropertyValue("--stroke").trim() || "#cbc6bc",
+      slack: styles.getPropertyValue("--slack").trim() || "#a6a197",
+    };
+  }
+
+  const NODE_COUNT = 70;
+  const NEIGHBORS_PER_NODE = 2;
+  const BOUNDS = { x: 720, y: 520, z: 360 };
+
+  // The heaviest part of the page (three.js) is purely decorative, so it's
+  // fetched and built only once the browser is idle — the hero's text and
+  // fonts never wait on it.
+  async function start() {
+    const {
+      Scene,
+      Group,
+      Vector3,
+      PerspectiveCamera,
+      WebGLRenderer,
+      BufferGeometry,
+      Float32BufferAttribute,
+      LineBasicMaterial,
+      LineSegments,
+      PointsMaterial,
+      Points,
+      CanvasTexture,
+      SRGBColorSpace,
+    } = await import("three");
+
+    // A small solid-fill disc sprite — crisp circle, no feathered/gradient
+    // edge, so the node reads as the same flat dot used in the leader-line
+    // component elsewhere on the page.
+    function discTexture() {
+      const size = 32;
+      const c = document.createElement("canvas");
+      c.width = c.height = size;
+      const ctx = c.getContext("2d")!;
+      ctx.fillStyle = "#fff";
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, size / 2 - 1, 0, Math.PI * 2);
+      ctx.fill();
+      const tex = new CanvasTexture(c);
+      tex.colorSpace = SRGBColorSpace;
+      return tex;
+    }
+
+    function buildLattice() {
+      const group = new Group();
+
+      const positions: InstanceType<typeof Vector3>[] = [];
+      for (let i = 0; i < NODE_COUNT; i++) {
+        positions.push(
+          new Vector3(
+            (Math.random() * 2 - 1) * BOUNDS.x,
+            (Math.random() * 2 - 1) * BOUNDS.y,
+            (Math.random() * 2 - 1) * BOUNDS.z
+          )
+        );
+      }
+
+      // Sparse proximity graph: each node struts to its nearest neighbors.
+      // Computed once, not per frame — the lattice only rotates as a whole.
+      const edgeKeys = new Set<string>();
+      const edgePositions: number[] = [];
+      positions.forEach((p, i) => {
+        const distances = positions
+          .map((q, j) => ({ j, d: i === j ? Infinity : p.distanceToSquared(q) }))
+          .sort((a, b) => a.d - b.d)
+          .slice(0, NEIGHBORS_PER_NODE);
+
+        for (const { j } of distances) {
+          const key = i < j ? `${i}-${j}` : `${j}-${i}`;
+          if (edgeKeys.has(key)) continue;
+          edgeKeys.add(key);
+          const q = positions[j];
+          edgePositions.push(p.x, p.y, p.z, q.x, q.y, q.z);
+        }
+      });
+
+      const colors = themeColors();
+
+      const lineGeometry = new BufferGeometry();
+      lineGeometry.setAttribute(
+        "position",
+        new Float32BufferAttribute(edgePositions, 3)
+      );
+      const lineMaterial = new LineBasicMaterial({
+        color: colors.stroke,
+        transparent: true,
+        opacity: 0.32,
+      });
+      group.add(new LineSegments(lineGeometry, lineMaterial));
+
+      const nodeGeometry = new BufferGeometry().setFromPoints(positions);
+      const nodeMaterial = new PointsMaterial({
+        color: colors.slack,
+        size: 7,
+        map: discTexture(),
+        transparent: true,
+        opacity: 0.6,
+        sizeAttenuation: true,
+        depthWrite: false,
+      });
+      group.add(new Points(nodeGeometry, nodeMaterial));
+
+      group.rotation.x = -0.2;
+      group.rotation.y = 0.3;
+      return { group, lineMaterial, nodeMaterial };
+    }
+
+    let renderer: InstanceType<typeof WebGLRenderer>;
+    try {
+      renderer = new WebGLRenderer({ canvas: canvas!, alpha: true, antialias: true });
+    } catch {
+      // No WebGL support — the flat ground color underneath is the fallback.
+      return;
+    }
+
+    const scene = new Scene();
+    const camera = new PerspectiveCamera(55, 1, 1, 3000);
+    camera.position.z = 520;
+
+    const { group: lattice, lineMaterial, nodeMaterial } = buildLattice();
+    scene.add(lattice);
+
+    function resize() {
+      const { innerWidth: w, innerHeight: h } = window;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(w, h);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    function render() {
+      renderer.render(scene, camera);
+    }
+
+    window.addEventListener("themechange", () => {
+      const colors = themeColors();
+      lineMaterial.color.set(colors.stroke);
+      nodeMaterial.color.set(colors.slack);
+      if (reduceMotion) render();
+    });
+
+    if (reduceMotion) {
+      render();
+    } else {
+      let running = true;
+      document.addEventListener("visibilitychange", () => {
+        running = document.visibilityState === "visible";
+        if (running) requestAnimationFrame(tick);
+      });
+
+      function tick() {
+        if (!running) return;
+        lattice.rotation.y += 0.0006;
+
+        const scrollFraction =
+          window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+        lattice.rotation.x = -0.2 + scrollFraction * 0.25;
+
+        render();
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+  }
+
+  type IdleWindow = Window & {
+    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+  };
+  const idleWindow = window as IdleWindow;
+  if (idleWindow.requestIdleCallback) {
+    idleWindow.requestIdleCallback(start, { timeout: 2000 });
+  } else {
+    setTimeout(start, 200);
+  }
+</script>

@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import TensegrityField from "../components/TensegrityField.astro";
 
 interface Props {
   title: string;
@@ -34,13 +35,33 @@ const fontFaceCSS = `
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Sets data-theme before first paint, so the page never flashes
+      the wrong scheme: a stored manual choice wins, otherwise the
+      visitor's system preference decides. Inline + is:inline so it
+      runs as a classic blocking script, not a deferred module.
+    -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var theme =
+            stored === "light" || stored === "dark"
+              ? stored
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <meta name="description" content={description} />
-    <meta name="color-scheme" content="light" />
     <title>{title}</title>
     <style set:html={fontFaceCSS}></style>
   </head>
   <body>
+    <TensegrityField />
     <slot />
   </body>
 </html>

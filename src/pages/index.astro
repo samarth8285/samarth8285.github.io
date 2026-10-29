@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import TechTag from "../components/TechTag.astro";
 
 const email = "samarthbhatt8285@gmail.com";
+const resumeHref = `${import.meta.env.BASE_URL}Samarth-Bhatt-Resume.pdf`;
 
 const heroMetrics = [
   { label: "ANNUAL COST REDUCED", value: "$170K" },
@@ -17,11 +18,9 @@ const experience = [
     org: "Rearc",
     place: "Pune, India",
     period: "Aug 2026 – Present",
-    // Current and just starting: nothing load-bearing proven here yet,
-    // so this member is drawn slack rather than taut.
-    state: "slack",
+    state: "taut",
     bullets: [
-      "Onboarding to cloud data practices and pursuing advanced platform certifications.",
+      "Onboarding to cloud data engineering practices and pursuing advanced platform certifications ahead of first client engagement.",
     ],
   },
   {
@@ -31,37 +30,16 @@ const experience = [
     period: "Aug 2023 – Jul 2026",
     state: "taut",
     bullets: [
-      "Managed end-to-end batch pipelines supporting financial reporting and regulatory submissions.",
-      "Implemented incremental, idempotent frameworks on Delta Lake for safe reprocessing.",
-      "Orchestrated 500+ production jobs through a zero-downtime migration, holding 100% SLA compliance throughout.",
-      "Built a centralized metadata platform that improved data discovery efficiency by roughly 40%.",
-      "Created a reusable engineering framework adopted across teams, saving 120+ engineering hours.",
-      "Designed star-schema models with SCD Type 2 dimensions for enterprise reporting.",
-      "Authored 7 internal technical guides standardizing pipeline practices and mentored 10+ engineers on performance tuning and data design.",
-      "Delivered Power BI dashboards for pricing and market analysis.",
-    ],
-  },
-  {
-    role: "Software Developer Intern",
-    org: "REVOLTRONIX",
-    place: "Ahmedabad, India",
-    period: "May – Jul 2022",
-    state: "taut",
-    bullets: [
-      "Built a cloud-based data ingestion and API layer using Node.js and Google Cloud.",
-      "Designed pipelines extracting and processing Reddit trend data for sentiment analysis.",
-      "Implemented serverless functions for automated transformation and querying.",
-    ],
-  },
-  {
-    role: "Frontend Web Developer Intern",
-    org: "Panayu",
-    place: "Ahmedabad, India",
-    period: "Oct – Dec 2021",
-    state: "taut",
-    bullets: [
-      "Built data-driven web interfaces integrating backend APIs with frontend components.",
-      "Designed and optimized MongoDB data models for efficient retrieval.",
+      "Owned end-to-end SLA-critical batch pipelines on Azure Databricks using PySpark and Spark SQL, supporting financial reporting, regulatory submissions, and downstream analytics.",
+      "Implemented incremental, idempotent processing frameworks on Delta Lake for safe, consistent reprocessing across enterprise systems.",
+      "Optimized Spark SQL workloads through partitioning, join strategies, and query tuning — cutting cloud compute costs by roughly $170K annually.",
+      "Orchestrated enterprise batch workflows through Control-M and strengthened platform reliability with CI/CD pipelines, automated testing, and branch protection via GitHub Actions.",
+      "Led platform modernization migrating 500+ production jobs with zero downtime, maintaining 100% SLA compliance throughout.",
+      "Built automated data validation, reconciliation, and audit-control frameworks, strengthening regulatory compliance and catching data-quality issues early in production.",
+      "Built a centralized metadata platform integrating Databricks REST APIs, Unity Catalog, and RBAC — cutting data discovery time and improving onboarding efficiency by roughly 40%.",
+      "Created a reusable data engineering accelerator framework adopted across delivery teams, saving 120+ engineering hours.",
+      "Designed star-schema models with SCD Type 2 dimensions, authored 7 internal technical guides, and mentored 10+ engineers on performance tuning and responsible GenAI tooling use.",
+      "Delivered Power BI dashboards for fuel and EV pricing analysis, enabling data-driven executive decision-making.",
     ],
   },
 ];
@@ -106,7 +84,6 @@ const skillGroups = [
       "GitHub Actions",
       "Bash / Shell Scripting",
       "Databricks Asset Bundles",
-      "Infrastructure-as-Code",
     ],
   },
   {
@@ -119,7 +96,7 @@ const skillGroups = [
   },
   {
     heading: "Other",
-    items: ["Node.js", "MongoDB", "Google Cloud"],
+    items: ["Node.js", "MongoDB"],
   },
 ];
 
@@ -128,6 +105,13 @@ const certifications = [
   { name: "Databricks Certified Generative AI Engineer Associate", date: "Oct 2026" },
   { name: "Databricks Certified Apache Spark Developer", date: "Jun 2024" },
   { name: "Databricks Certified Associate Data Engineer", date: "Jan 2024" },
+];
+
+const awards = [
+  "Most Valuable Contribution, internal hackathon — for delivering high-impact enterprise data solutions.",
+  "Senior leadership recognition for driving large-scale cloud cost optimization initiatives.",
+  "Recognized for leading enterprise documentation, delivery, and operational standardization initiatives.",
+  "Special recognition for designing high-impact Power BI dashboards adopted across multiple stakeholder groups.",
 ];
 
 const pipelineStages = ["RAW FILES", "BRONZE", "SILVER", "GOLD", "AI/BI"];
@@ -185,11 +169,14 @@ const navLinks = [
           <p class="lede">
             Three years engineering SLA-critical financial and regulatory data
             pipelines on Azure Databricks. Every claim below is pinned to a
-            real outcome — the structure only stands because the numbers
+            real outcome, the structure only stands because the numbers
             underneath it are true.
           </p>
           <div class="hero__actions">
             <a class="cta" href="#experience">View experience</a>
+            <a class="cta cta--ghost mono" href={resumeHref} download="Samarth-Bhatt-Resume.pdf">
+              Download résumé (PDF) ↓
+            </a>
             <a class="cta cta--ghost mono" href={`mailto:${email}`}>{email} →</a>
           </div>
         </div>
@@ -262,14 +249,17 @@ const navLinks = [
             <polyline class="reveal-line branch__line" points="0,0 40,0 60,60" style="--len: 108" />
           </svg>
           <div class="branch__content reveal">
-            <h2>Project</h2>
+            <h2>Projects</h2>
             <h3 class="branch__title">NYC Yellow Taxi Data Pipeline</h3>
             <p class="lede">
-              A medallion-architecture pipeline processing 209 monthly NYC TLC
-              trip-record files (2009–2026), deployed as a Databricks Asset
-              Bundle. Schema-aware Auto Loader ingestion reconciles 3
-              incompatible historical layouts into one clean Silver layer;
-              Gold aggregate tables support AI/BI dashboards.
+              A Databricks Lakeflow pipeline processing 209 monthly NYC TLC
+              trip-record files (2009–2026) into a medallion (Bronze/Silver/Gold)
+              architecture, deployed as a Databricks Asset Bundle. Idempotent
+              landing into Unity Catalog Volumes feeds schema-aware Auto Loader
+              ingestion that reconciles 3 incompatible historical layouts into
+              a single canonical Bronze table; Silver-layer cleaning feeds two
+              Gold aggregate tables powering a 2-page AI/BI dashboard — Trip
+              Summary and Price Hikes.
             </p>
 
             <div class="pipeline reveal" role="img" aria-label="Pipeline stages: raw files flow through Bronze, Silver, and Gold layers into AI/BI dashboards">
@@ -291,6 +281,7 @@ const navLinks = [
               <TechTag label="Delta Lake" />
               <TechTag label="Databricks Asset Bundles" />
               <TechTag label="Auto Loader" />
+              <TechTag label="Unity Catalog" />
               <TechTag label="Medallion Architecture" />
               <TechTag label="AI/BI Dashboards" />
             </div>
@@ -318,7 +309,7 @@ const navLinks = [
         </div>
 
         <div class="certs reveal">
-          <p class="mono-label certs__heading">Certifications</p>
+          <p class="mono-label certs__heading">Certifications &amp; Education</p>
           <ul class="certs__list">
             {
               certifications.map((c) => (
@@ -329,11 +320,21 @@ const navLinks = [
               ))
             }
           </ul>
+          <p class="education mono-label">
+            B.E. Computer Engineering, AI &amp; Machine Learning — NMIMS, 2019–2023
+          </p>
         </div>
 
-        <p class="education reveal mono-label">
-          B.E. Computer Engineering, AI &amp; Machine Learning — NMIMS, 2019–2023
-        </p>
+        <div class="certs reveal">
+          <p class="mono-label certs__heading">Awards</p>
+          <ul class="awards__list">
+            {
+              awards.map((a) => (
+                <li>{a}</li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -354,6 +355,9 @@ const navLinks = [
           <a class="cta cta--ghost mono" href="https://github.com/samarth8285" target="_blank" rel="noreferrer">
             github.com/samarth8285 ↗
           </a>
+          <a class="cta cta--ghost mono" href="https://medium.com/@samarthbhatt8285" target="_blank" rel="noreferrer">
+            medium.com/@samarthbhatt8285 ↗
+          </a>
         </div>
       </div>
       <div class="ground" aria-hidden="true"></div>
@@ -363,6 +367,22 @@ const navLinks = [
   <footer class="site-footer">
     <div class="wrap site-footer__inner mono-label">
       <p>Samarth Bhatt</p>
+      <button
+        type="button"
+        id="theme-toggle"
+        class="theme-switch"
+        role="switch"
+        aria-checked="false"
+        aria-label="Toggle color theme"
+      >
+        <span class="theme-switch__track" aria-hidden="true">
+          <span class="theme-switch__thumb" aria-hidden="true"></span>
+        </span>
+        <span aria-hidden="true">
+          <span class="theme-switch__to-light">Light mode</span>
+          <span class="theme-switch__to-dark">Dark mode</span>
+        </span>
+      </button>
       <p>Built with Astro</p>
     </div>
   </footer>
@@ -483,10 +503,19 @@ const navLinks = [
     /* ---------------- Hero ---------------- */
     .hero {
       padding-block: var(--space-7) var(--space-6);
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100svh;
+    }
+
+    .hero .wrap {
+      width: 100%;
     }
 
     .hero__inner {
       display: grid;
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--space-5);
     }
 
@@ -498,6 +527,7 @@ const navLinks = [
 
     .hero__intro p.lede + p.lede {
       margin-top: var(--space-2);
+      max-width: none;
     }
 
     .hero__actions {
@@ -763,7 +793,6 @@ const navLinks = [
       margin: var(--space-2) 0 0;
       padding-left: 1.1rem;
       color: var(--ink-secondary);
-      max-width: 62ch;
     }
 
     .column__bullets li + li {
@@ -798,6 +827,7 @@ const navLinks = [
 
     .branch__content .lede {
       margin-top: var(--space-2);
+      max-width: none;
     }
 
     /* Pipeline flow: a packet travels the rail left to right, changing
@@ -850,10 +880,10 @@ const navLinks = [
       5% {
         opacity: 1;
       }
-      38% {
+      18% {
         background: var(--slack);
       }
-      45% {
+      25% {
         background: var(--accent);
       }
       95% {
@@ -938,8 +968,21 @@ const navLinks = [
       white-space: nowrap;
     }
 
+    .awards__list {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--ink-secondary);
+      max-width: 62ch;
+    }
+
+    .awards__list li + li {
+      margin-top: 0.5rem;
+    }
+
     .education {
-      margin-top: var(--space-4);
+      margin-top: var(--space-3);
+      padding-top: var(--space-3);
+      border-top: 1px dashed var(--stroke);
     }
 
     /* ---------------- Contact ---------------- */
@@ -976,8 +1019,73 @@ const navLinks = [
 
     .site-footer__inner {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
+      align-items: center;
+      gap: var(--space-2);
       color: var(--ink-secondary);
+    }
+
+    /* A plain mechanical switch, not a decorative control — same
+       vocabulary as the rest of the page: square edges, a hairline
+       stroke, a flat fill. No shadow, no accent (see DESIGN.md). */
+    .theme-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font: inherit;
+      letter-spacing: inherit;
+      text-transform: inherit;
+      color: var(--ink-secondary);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .theme-switch:hover {
+      color: var(--ink);
+    }
+
+    .theme-switch__track {
+      position: relative;
+      flex-shrink: 0;
+      width: 36px;
+      height: 18px;
+      border: 1px solid var(--stroke);
+    }
+
+    .theme-switch__thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 12px;
+      height: 12px;
+      background: var(--ink-secondary);
+      transition:
+        transform 0.25s var(--ease-out-expo),
+        background 0.2s ease;
+    }
+
+    .theme-switch:hover .theme-switch__thumb {
+      background: var(--ink);
+    }
+
+    :root[data-theme="dark"] .theme-switch__thumb {
+      transform: translateX(20px);
+    }
+
+    .theme-switch__to-dark {
+      display: none;
+    }
+
+    :root[data-theme="dark"] .theme-switch__to-dark {
+      display: inline;
+    }
+
+    :root[data-theme="dark"] .theme-switch__to-light {
+      display: none;
     }
   </style>
 
@@ -1026,10 +1134,33 @@ const navLinks = [
         navList.classList.toggle("is-open", !open);
       });
       navList.addEventListener("click", (e) => {
-        if ((e.target as HTMLElement).tagName === "A") closeNav();
+        if ((e.target as HTMLElement).closest("a")) closeNav();
       });
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeNav();
+      });
+    }
+
+    // Theme toggle: the inline head script already picked the initial
+    // scheme (stored choice, else system preference) before first paint.
+    // This just handles the manual override and tells the 3D field to
+    // recolor its lines/nodes to the new theme's tokens.
+    const themeToggle = document.getElementById("theme-toggle");
+    if (themeToggle) {
+      const syncChecked = () =>
+        themeToggle.setAttribute(
+          "aria-checked",
+          String(document.documentElement.dataset.theme === "dark")
+        );
+      syncChecked();
+      themeToggle.addEventListener("click", () => {
+        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = next;
+        try {
+          localStorage.setItem("theme", next);
+        } catch {}
+        syncChecked();
+        window.dispatchEvent(new CustomEvent("themechange", { detail: { theme: next } }));
       });
     }
 
