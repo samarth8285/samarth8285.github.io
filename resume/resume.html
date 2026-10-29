@@ -1,0 +1,344 @@
+<!--
+  Source for public/Samarth-Bhatt-Resume.pdf. Kept in sync with the
+  Experience/Skills/Certifications data in src/pages/index.astro — edit
+  here, then regenerate with Chrome's print-to-PDF, e.g.:
+    google-chrome --headless=new --print-to-pdf=../public/Samarth-Bhatt-Resume.pdf \
+      --no-pdf-header-footer "file://$(pwd)/resume.html"
+  (or open in a browser and use File > Print > Save as PDF, A4, no margins
+  override — the page already sets its own @page margins).
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Samarth Bhatt — Resume</title>
+<style>
+  @font-face {
+    font-family: "Archivo";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../public/fonts/archivo-400.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Archivo";
+    font-style: normal;
+    font-weight: 600;
+    src: url("../public/fonts/archivo-600.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Archivo";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../public/fonts/archivo-700.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Archivo";
+    font-style: normal;
+    font-weight: 800;
+    src: url("../public/fonts/archivo-800.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Space Mono";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../public/fonts/space-mono-400.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Space Mono";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../public/fonts/space-mono-700.woff2") format("woff2");
+  }
+
+  :root {
+    --ink: #16140f;
+    --ink-secondary: #5b564b;
+    --accent: #b3261a;
+    --stroke: #cbc6bc;
+  }
+
+  * { box-sizing: border-box; }
+
+  @page {
+    size: A4;
+    margin: 15mm 16mm;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    color: var(--ink);
+    font-family: "Archivo", sans-serif;
+    font-size: 9pt;
+    line-height: 1.26;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono { font-family: "Space Mono", monospace; }
+
+  h1, h2, h3 { margin: 0; font-family: "Archivo", sans-serif; }
+
+  header.rhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1.5pt solid var(--ink);
+    padding-bottom: 6pt;
+    margin-bottom: 10pt;
+  }
+
+  header.rhead h1 {
+    font-size: 21pt;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  header.rhead .role {
+    font-size: 10pt;
+    font-weight: 600;
+    margin-top: 2pt;
+  }
+
+  header.rhead .contact {
+    text-align: right;
+    font-family: "Space Mono", monospace;
+    font-size: 7.6pt;
+    color: var(--ink-secondary);
+    line-height: 1.6;
+  }
+
+  section { margin-top: 7pt; }
+  section:first-of-type { margin-top: 0; }
+
+  .sec-title {
+    font-family: "Space Mono", monospace;
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 0.75pt solid var(--ink);
+    padding-bottom: 2.5pt;
+    margin-bottom: 6pt;
+  }
+
+  .job { margin-bottom: 4pt; }
+  .job:last-child { margin-bottom: 0; }
+
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .job-head .title {
+    font-size: 10pt;
+    font-weight: 700;
+  }
+
+  .job-head .org {
+    font-weight: 400;
+    color: var(--ink-secondary);
+  }
+
+  .job-head .period {
+    font-family: "Space Mono", monospace;
+    font-size: 7.6pt;
+    color: var(--ink-secondary);
+    white-space: nowrap;
+  }
+
+  .job .place {
+    font-family: "Space Mono", monospace;
+    font-size: 7.6pt;
+    color: var(--ink-secondary);
+    margin-top: 0.5pt;
+  }
+
+  ul.bullets {
+    margin: 3pt 0 0;
+    padding-left: 11pt;
+  }
+
+  ul.bullets li {
+    margin-top: 1.5pt;
+  }
+  ul.bullets li:first-child { margin-top: 0; }
+
+  .project-line {
+    font-weight: 700;
+    font-size: 9.6pt;
+  }
+
+  .project-desc {
+    margin-top: 2pt;
+    color: var(--ink-secondary);
+  }
+
+  .tags {
+    margin-top: 3pt;
+    font-family: "Space Mono", monospace;
+    font-size: 7.4pt;
+    color: var(--ink-secondary);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 14pt;
+    row-gap: 3pt;
+  }
+
+  .skill-row {
+    display: flex;
+    gap: 5pt;
+  }
+
+  .skill-row .k {
+    font-family: "Space Mono", monospace;
+    font-size: 7pt;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--ink);
+    flex-shrink: 0;
+    width: 90pt;
+  }
+
+  .skill-row .v {
+    color: var(--ink-secondary);
+  }
+
+  .bottom-row {
+    display: flex;
+    gap: 18pt;
+    margin-top: 7pt;
+  }
+
+  .bottom-row > section {
+    margin-top: 0;
+    flex: 1;
+  }
+
+  .certs-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10pt;
+    row-gap: 2.5pt;
+  }
+
+  .certs-list .cert {
+    display: flex;
+    justify-content: space-between;
+    gap: 6pt;
+  }
+
+  .certs-list .cert .date {
+    font-family: "Space Mono", monospace;
+    font-size: 7pt;
+    color: var(--ink-secondary);
+    white-space: nowrap;
+  }
+
+  .edu-line {
+    color: var(--ink-secondary);
+    margin-top: 4pt;
+  }
+
+  .awards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 14pt;
+    row-gap: 2.5pt;
+    color: var(--ink-secondary);
+  }
+</style>
+</head>
+<body>
+
+  <header class="rhead">
+    <div>
+      <h1>Samarth Bhatt</h1>
+      <p class="role">Data Engineer — Cloud Data Platforms</p>
+    </div>
+    <div class="contact">
+      +91-7600182518 · samarthbhatt8285@gmail.com<br />
+      linkedin.com/in/samarthbhatt25<br />
+      github.com/samarth8285 · Pune, India
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-title">Experience</div>
+
+    
+    <div class="job">
+      <div class="job-head">
+        <div class="title">Data Engineer <span class="org">— Rearc</span></div>
+        <div class="period">Aug 2026 – Present</div>
+      </div>
+      <div class="place">Pune, India</div>
+      <ul class="bullets">
+        <li>Onboarding to cloud data engineering practices and pursuing advanced platform certifications ahead of first client engagement.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job-head">
+        <div class="title">Associate Data Engineer <span class="org">— Shell India Markets Pvt. Ltd.</span></div>
+        <div class="period">Aug 2023 – Jul 2026</div>
+      </div>
+      <div class="place">Bengaluru, India</div>
+      <ul class="bullets">
+        <li>Owned end-to-end SLA-critical batch pipelines on Azure Databricks (PySpark, Spark SQL) for financial reporting, regulatory submissions, and downstream analytics, using incremental, idempotent frameworks on Delta Lake.</li>
+        <li>Optimized Spark SQL workloads through partitioning, join strategies, and query tuning — cutting cloud compute costs by ~$170K annually.</li>
+        <li>Orchestrated enterprise batch workflows via Control-M and strengthened reliability with CI/CD pipelines, automated testing, and branch protection via GitHub Actions.</li>
+        <li>Led platform modernization migrating 500+ production jobs with zero downtime, maintaining 100% SLA compliance throughout.</li>
+        <li>Built automated data validation, reconciliation, and audit-control frameworks; built a centralized metadata platform (Databricks REST APIs, Unity Catalog, RBAC) cutting data discovery time by ~40%.</li>
+        <li>Created a reusable engineering accelerator framework (saving 120+ engineering hours) and designed star-schema models with SCD Type 2 dimensions.</li>
+        <li>Authored 7 internal technical guides and mentored 10+ engineers on performance tuning and responsible GenAI tooling use; delivered Power BI dashboards for fuel and EV pricing analysis.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Project</div>
+    <div class="project-line">NYC Yellow Taxi Data Pipeline</div>
+    <p class="project-desc">Databricks Lakeflow pipeline processing 209 monthly NYC TLC trip-record files (2009–2026) into a medallion (Bronze/Silver/Gold) architecture, deployed as a Databricks Asset Bundle. Idempotent landing into Unity Catalog Volumes feeds schema-aware Auto Loader ingestion that reconciles 3 incompatible historical layouts into a single canonical Bronze table; Silver-layer cleaning feeds two Gold aggregate tables powering a 2-page AI/BI dashboard — Trip Summary and Price Hikes.</p>
+    <div class="tags">PySpark · Delta Lake · Databricks Asset Bundles · Auto Loader · Unity Catalog · Medallion Architecture · AI/BI Dashboards — github.com/samarth8285/nyc-yellow-taxi-project</div>
+  </section>
+
+  <section>
+    <div class="sec-title">Skills</div>
+    <div class="skills-grid">
+      <div class="skill-row"><div class="k">Programming</div><div class="v">Python (PySpark, Pandas), SQL (Spark SQL, Databricks SQL), Query Optimization</div></div>
+      <div class="skill-row"><div class="k">Governance</div><div class="v">Data Validation, Reconciliation, Audit Controls, RBAC, Star Schema, SCD Type 2</div></div>
+      <div class="skill-row"><div class="k">Big Data</div><div class="v">Apache Spark, Delta Lake, Databricks Lakeflow, Medallion/Lakehouse Architecture, Data Warehousing</div></div>
+      <div class="skill-row"><div class="k">Orchestration</div><div class="v">Control-M, Git, GitHub Actions, Bash, Databricks Asset Bundles, IaC</div></div>
+      <div class="skill-row"><div class="k">Cloud</div><div class="v">Microsoft Azure, Azure Databricks, ADLS Gen2, Unity Catalog, Docker</div></div>
+      <div class="skill-row"><div class="k">Analytics / BI</div><div class="v">Databricks SQL, Power BI, AI/BI (Lakeview) Dashboards</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Certifications &amp; Education</div>
+    <div class="certs-list">
+      <div class="cert"><span>Databricks Certified Data Engineer Professional</span><span class="date">Aug 2026</span></div>
+      <div class="cert"><span>Databricks Certified Associate Data Engineer</span><span class="date">Jan 2024</span></div>
+      <div class="cert"><span>Databricks Certified Gen AI Engineer Associate</span><span class="date">Oct 2026</span></div>
+      <div class="cert"><span>Databricks Certified Apache Spark Developer</span><span class="date">Jun 2024</span></div>
+    </div>
+    <p class="edu-line">B.E. Computer Engineering, AI &amp; Machine Learning — NMIMS, 2019–2023</p>
+  </section>
+
+  <section>
+    <div class="sec-title">Awards</div>
+    <div class="awards-grid">
+      <div>Most Valuable Contribution, internal hackathon — high-impact enterprise data solutions.</div>
+      <div>Senior leadership recognition for large-scale cloud cost optimization initiatives.</div>
+      <div>Recognized for leading enterprise documentation, delivery, and standardization initiatives.</div>
+      <div>Special recognition for high-impact Power BI dashboards adopted across stakeholder groups.</div>
+    </div>
+  </section>
+
+</body>
+</html>
