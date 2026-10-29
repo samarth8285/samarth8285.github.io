@@ -153,9 +153,6 @@ const navLinks = [
           <span class="nav-toggle__bar" aria-hidden="true"></span>
         </button>
       </nav>
-      <p class="status-readout mono-label" id="status-readout" aria-hidden="true">
-        STATUS: BALANCED
-      </p>
     </div>
   </header>
 
@@ -348,15 +345,30 @@ const navLinks = [
           Azure Databricks work.
         </p>
         <div class="contact__links">
-          <a class="cta" href={`mailto:${email}`}>{email}</a>
-          <a class="cta cta--ghost mono" href="https://linkedin.com/in/samarthbhatt25" target="_blank" rel="noreferrer">
-            linkedin.com/in/samarthbhatt25 ↗
+          <a class="contact__icon" href={`mailto:${email}`} aria-label={`Email ${email}`} title={email}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <path d="m3 7 9 6 9-6"></path>
+            </svg>
+            <span class="sr-only">{email}</span>
           </a>
-          <a class="cta cta--ghost mono" href="https://github.com/samarth8285" target="_blank" rel="noreferrer">
-            github.com/samarth8285 ↗
+          <a class="contact__icon" href="https://linkedin.com/in/samarthbhatt25" target="_blank" rel="noreferrer" aria-label="Samarth Bhatt on LinkedIn" title="linkedin.com/in/samarthbhatt25">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"></path>
+            </svg>
+            <span class="sr-only">linkedin.com/in/samarthbhatt25</span>
           </a>
-          <a class="cta cta--ghost mono" href="https://medium.com/@samarthbhatt8285" target="_blank" rel="noreferrer">
-            medium.com/@samarthbhatt8285 ↗
+          <a class="contact__icon" href="https://github.com/samarth8285" target="_blank" rel="noreferrer" aria-label="Samarth Bhatt on GitHub" title="github.com/samarth8285">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.38 7.86 10.9.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.26-1.28-5.26-5.69 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.73.8 1.17 1.83 1.17 3.09 0 4.42-2.7 5.4-5.27 5.68.42.36.78 1.07.78 2.16 0 1.56-.02 2.82-.02 3.2 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"></path>
+            </svg>
+            <span class="sr-only">github.com/samarth8285</span>
+          </a>
+          <a class="contact__icon" href="https://medium.com/@samarthbhatt8285" target="_blank" rel="noreferrer" aria-label="Samarth Bhatt on Medium" title="medium.com/@samarthbhatt8285">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12ZM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42ZM24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75c.66 0 1.19 2.57 1.19 5.75Z"></path>
+            </svg>
+            <span class="sr-only">medium.com/@samarthbhatt8285</span>
           </a>
         </div>
       </div>
@@ -491,13 +503,6 @@ const navLinks = [
         padding: var(--space-3);
         gap: var(--space-3);
       }
-    }
-
-    .status-readout {
-      white-space: nowrap;
-      color: var(--accent);
-      min-width: 9ch;
-      text-align: right;
     }
 
     /* ---------------- Hero ---------------- */
@@ -1001,10 +1006,45 @@ const navLinks = [
 
     .contact__links {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-2);
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3);
       margin-top: var(--space-4);
+    }
+
+    .contact__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      background: var(--ink);
+      color: var(--bg);
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+      transition: transform 0.2s var(--ease-out-expo), background 0.2s ease;
+    }
+
+    .contact__icon svg {
+      width: 1.375rem;
+      height: 1.375rem;
+    }
+
+    .contact__icon:hover {
+      transform: translateY(-2px);
+      background: var(--accent);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     .ground {
@@ -1162,18 +1202,6 @@ const navLinks = [
         syncChecked();
         window.dispatchEvent(new CustomEvent("themechange", { detail: { theme: next } }));
       });
-    }
-
-    // Persistent corner readout — a quiet trust signal, not a
-    // notification. Static under reduced motion.
-    const readout = document.getElementById("status-readout");
-    if (readout && !reduceMotion) {
-      const states = ["STATUS: BALANCED", "LOAD: VERIFIED", "UPTIME: 100%"];
-      let i = 0;
-      setInterval(() => {
-        i = (i + 1) % states.length;
-        readout.textContent = states[i];
-      }, 4000);
     }
   </script>
 </BaseLayout>
