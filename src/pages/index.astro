@@ -282,8 +282,8 @@ const navLinks = [
               <TechTag label="Medallion Architecture" />
               <TechTag label="AI/BI Dashboards" />
             </div>
-            <a class="cta cta--ghost mono" href="https://github.com/samarth8285/nyc-yellow-taxi-project" target="_blank" rel="noreferrer">
-              github.com/samarth8285/nyc-yellow-taxi-project →
+            <a class="cta cta--ghost mono branch__cta" href="https://github.com/samarth8285/nyc-yellow-taxi-project" target="_blank" rel="noreferrer" aria-label="Learn more about the NYC Yellow Taxi Data Pipeline on GitHub (opens in a new tab)">
+              Learn more →
             </a>
           </div>
         </div>
@@ -771,7 +771,13 @@ const navLinks = [
       align-items: baseline;
       justify-content: space-between;
       gap: var(--space-2);
-      flex-wrap: wrap;
+    }
+
+    /* The label wraps its own text on narrow screens so the value
+       stays pinned right instead of dropping to a new line. */
+    .column__segment--metric .mono-label {
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     .column__metric-value {
@@ -805,16 +811,35 @@ const navLinks = [
     }
 
     /* ---------------- Project branch ---------------- */
+    /* The connector hangs in the gutter left of the content so the
+       project text lines up with every other section's left edge. It
+       only shows once the viewport leaves enough outer margin for it
+       (68rem wrap + 60px connector + gap on each side). */
     .branch {
-      display: grid;
-      grid-template-columns: 60px minmax(0, 1fr);
-      gap: var(--space-3);
+      position: relative;
     }
 
     .branch__connector {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: calc(100% + var(--space-3));
       width: 60px;
       height: 100%;
       min-height: 60px;
+    }
+
+    @media (min-width: 76rem) {
+      .branch__connector {
+        display: block;
+      }
+    }
+
+    @media (max-width: 639px) {
+      .pipeline__stages {
+        gap: var(--space-1);
+        font-size: 0.6875rem;
+      }
     }
 
     .branch__line {
@@ -828,6 +853,10 @@ const navLinks = [
     .branch__title {
       margin-top: var(--space-2);
       font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
+    }
+
+    .branch__cta {
+      margin-top: var(--space-2);
     }
 
     .branch__content .lede {
